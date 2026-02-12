@@ -7,6 +7,9 @@ if (!API_BASE_URL) {
 export const API_CONFIG = {
   baseUrl: API_BASE_URL,
   endpoints: {
+    epp: {
+      create: "/api/Epp/Create",
+    },
     catalogs: {
       getEppTypes: "/api/Catalogs/epp-types",
     },
