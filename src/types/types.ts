@@ -15,3 +15,8 @@ export interface Epp {
   reasonRequestId: number;
   previousConditionId: number;
 }
+
+export interface Sizes {
+  id: number;
+  nameSize: string;
+}
