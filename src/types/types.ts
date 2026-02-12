@@ -20,3 +20,8 @@ export interface Sizes {
   id: number;
   nameSize: string;
 }
+
+export interface ReasonRequest {
+  id: number;
+  nameReason: string;
+}
