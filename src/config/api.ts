@@ -13,6 +13,7 @@ export const API_CONFIG = {
     catalogs: {
       getEppTypes: "/api/Catalogs/epp-types",
       getSizes: "/api/Catalogs/sizes",
+      getReasonRequest: "/api/Catalogs/ReasonRequest",
     },
   },
 };
