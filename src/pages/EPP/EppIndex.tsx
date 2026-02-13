@@ -182,6 +182,61 @@ export const EppIndex = () => {
             }}
           />
         </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">
+            ¿Entrega EPP anterior?
+          </label>
+
+          <div
+            className={`flex items-center gap-4 h-11.5 px-4 rounded-lg border transition-all duration-200 ${
+              formData.deliveryEPPPrevious !== null
+                ? "bg-blue-50/30 border-blue-400 shadow-sm shadow-blue-100"
+                : "bg-slate-50 border-slate-200"
+            }`}
+          >
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="radio"
+                name="deliveryEPPPrevious"
+                className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500 
+                cursor-pointer transition-transform group-active:scale-90"
+                checked={formData.deliveryEPPPrevious === true}
+                onChange={() => handleChange("deliveryEPPPrevious", true)}
+              />
+              <span
+                className={`text-sm font-medium transition-colors ${
+                  formData.deliveryEPPPrevious === true
+                    ? "text-blue-700"
+                    : "text-slate-600 group-hover:text-blue-600"
+                }`}
+              >
+                Sí
+              </span>
+            </label>
+            <div className="w-px h-4 bg-slate-200" />
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="radio"
+                name="deliveryEPPPrevious"
+                className="w-4 h-4 text-blue-600 border-slate-300 
+                focus:ring-blue-500 cursor-pointer transition-transform 
+                group-active:scale-90"
+                checked={formData.deliveryEPPPrevious === false}
+                onChange={() => handleChange("deliveryEPPPrevious", false)}
+              />
+              <span
+                className={`text-sm font-medium transition-colors ${
+                  formData.deliveryEPPPrevious === false
+                    ? "text-blue-700"
+                    : "text-slate-600 group-hover:text-blue-600"
+                }`}
+              >
+                No
+              </span>
+            </label>
+          </div>
+        </div>
       </FormCard>
     </div>
   );
