@@ -2,21 +2,21 @@ import { useState, useRef, useEffect } from "react";
 
 interface Option {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface Props {
   label: string;
   options: Option[];
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: string | number;
+  onChange?: (value: string | number) => void;
 }
 
 export const FloatingSelect = ({ label, options, value, onChange }: Props) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const selected = options.find((o) => o.value === value);
+  const selected = options.find((o) => String(o.value) === String(value));
 
   const hasValue = !!value;
 
@@ -95,7 +95,7 @@ export const FloatingSelect = ({ label, options, value, onChange }: Props) => {
               className={`
                 px-4 py-2 text-sm cursor-pointer transition-colors
                 ${
-                  value === option.value
+                  String(value) === String(option.value)
                     ? "bg-blue-50 text-blue-600"
                     : "hover:bg-gray-100 text-gray-700"
                 }
