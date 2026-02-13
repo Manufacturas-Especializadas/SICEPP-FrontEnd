@@ -15,6 +15,7 @@ export const API_CONFIG = {
       getSizes: "/api/Catalogs/sizes",
       getReasonRequest: "/api/Catalogs/ReasonRequest",
       getPreviousCondition: "/api/Catalogs/previous-condition",
+      getEpp: "/api/Catalogs/epp",
     },
   },
 };
