@@ -10,7 +10,8 @@ import { usePreviousCondition } from "../../hooks/usePreviousCondition";
 import { LoadingSkeleton } from "../../components/LoadingSkeleton/LoadingSkeleton";
 
 export const EppIndex = () => {
-  const { formData, loading, handleChange, handleSubmit } = useEppForm();
+  const { formData, loading, handleChange, handleSubmit, resetForm } =
+    useEppForm();
 
   const { data: eppTypes } = useEppTypes();
   const { data: sizes } = useSizes();
@@ -50,6 +51,7 @@ export const EppIndex = () => {
         subtitle="Control de equipo de protección persona para colaboradores"
         icon={<HardHat size={24} />}
         onSubmit={handleSubmit}
+        resetForm={resetForm}
       >
         <div className="flex flex-col gap-1.5">
           <Input
