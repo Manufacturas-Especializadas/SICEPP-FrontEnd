@@ -1,3 +1,17 @@
+export interface Epp {
+  id: number;
+  name: string;
+  area: string;
+  position: string;
+  shift: string;
+  eppType: string;
+  size: string;
+  requestedQuantity: number;
+  previousCondition: string;
+  deliveryEPPPrevious: boolean;
+  createdAt: string;
+}
+
 export interface EppTypes {
   id: number;
   nameType: string;
