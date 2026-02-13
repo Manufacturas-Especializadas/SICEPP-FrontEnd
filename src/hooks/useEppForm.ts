@@ -7,7 +7,7 @@ interface useEppFormReturn {
   loading: boolean;
   error: string | null;
   formData: Epp;
-  handleChange: (field: keyof Epp, value: string | number) => void;
+  handleChange: (field: keyof Epp, value: string | number | boolean) => void;
   handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => Promise<void>;
   resetForm: () => void;
 }
@@ -31,10 +31,14 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
   const [formData, setFormData] = useState<Epp>(initialFormData);
 
   const handleChange = useCallback(
-    (field: keyof Epp, value: string | number) => {
+    (field: keyof Epp, value: string | number | boolean) => {
       setFormData((prev) => ({
         ...prev,
-        [field]: value,
+        [field]:
+          typeof value !== "boolean" &&
+          (field.toString().endsWith("Id") || field === "requestedQuantity")
+            ? Number(value)
+            : value,
       }));
 
       if (error) setError(null);
