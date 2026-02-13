@@ -25,3 +25,8 @@ export interface ReasonRequest {
   id: number;
   nameReason: string;
 }
+
+export interface PreviousCondition {
+  id: number;
+  nameCondition: string;
+}
