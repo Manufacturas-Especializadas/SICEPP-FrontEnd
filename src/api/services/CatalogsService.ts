@@ -1,6 +1,6 @@
 import { API_CONFIG } from "../../config/api";
 import type {
-  Epp,
+  EppListItem,
   EppTypes,
   PreviousCondition,
   ReasonRequest,
@@ -41,8 +41,8 @@ class CatalogsService {
     );
   }
 
-  async getEpp(): Promise<Epp[]> {
-    return apiClient.get<Epp[]>(this.getEppEndpoint);
+  async getEpp(): Promise<EppListItem[]> {
+    return apiClient.get<EppListItem[]>(this.getEppEndpoint);
   }
 }
 
