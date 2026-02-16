@@ -22,6 +22,7 @@ export interface Epp {
   area: string;
   position: string;
   shift: string;
+  status: string;
   requestedQuantity: number;
   deliveryEPPPrevious: boolean;
   eppTypeId: number;
