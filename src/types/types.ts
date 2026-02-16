@@ -39,6 +39,24 @@ export interface StoreDetail {
   deliveryConfirmation?: boolean;
 }
 
+export interface EppDetail {
+  id: number;
+  name: string;
+  area: string;
+  position: string;
+  shift: string;
+  requestedQuantity: number;
+  deliveryEPPPrevious: boolean;
+  createdAt?: string;
+
+  eppType: string;
+  size: string;
+  reasonRequest: string;
+  previousCondition: string;
+
+  store?: StoreDetail | null;
+}
+
 export interface Sizes {
   id: number;
   nameSize: string;
