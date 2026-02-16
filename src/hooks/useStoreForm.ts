@@ -101,9 +101,9 @@ export const useStoreForm = (
       try {
         const payload = {
           eppId: formData.eppId,
-          deliveryDate: formData.deliveryDate || null,
-          authorizedBy: formData.authorizedBy || null,
-          lastDelivery: formData.lastDelivery || null,
+          deliveryDate: formData.deliveryDate,
+          authorizedBy: formData.authorizedBy,
+          lastDelivery: formData.lastDelivery,
           replacementPolicy: formData.replacementPolicy ?? false,
           statusId: Number(formData.statusId),
           deliveryConfirmation: formData.deliveryConfirmation ?? false,
