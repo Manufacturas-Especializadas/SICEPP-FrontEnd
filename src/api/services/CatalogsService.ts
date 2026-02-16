@@ -1,5 +1,6 @@
 import { API_CONFIG } from "../../config/api";
 import type {
+  Epp,
   EppTypes,
   PreviousCondition,
   ReasonRequest,
@@ -14,6 +15,7 @@ class CatalogsService {
     API_CONFIG.endpoints.catalogs.getReasonRequest;
   private getPreviousConditionEndpoint =
     API_CONFIG.endpoints.catalogs.getPreviousCondition;
+  private getEppEndpoint = API_CONFIG.endpoints.catalogs.getEpp;
 
   async getEppTypes(): Promise<EppTypes[]> {
     return apiClient.get<EppTypes[]>(this.getEppTypesEndpoint);
@@ -31,6 +33,10 @@ class CatalogsService {
     return apiClient.get<PreviousCondition[]>(
       this.getPreviousConditionEndpoint,
     );
+  }
+
+  async getEpp(): Promise<Epp[]> {
+    return apiClient.get<Epp[]>(this.getEppEndpoint);
   }
 }
 
