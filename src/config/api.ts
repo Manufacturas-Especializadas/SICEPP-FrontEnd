@@ -8,6 +8,7 @@ export const API_CONFIG = {
   baseUrl: API_BASE_URL,
   endpoints: {
     epp: {
+      getEppDetails: "/api/Epp/",
       create: "/api/Epp/Create",
     },
     catalogs: {
