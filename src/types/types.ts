@@ -1,3 +1,5 @@
+export type StatusType = "Pendiente autorizacion" | "Aprobado" | "Rechazado";
+
 export interface Epp {
   id: number;
   name: string;
