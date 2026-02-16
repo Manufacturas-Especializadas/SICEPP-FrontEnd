@@ -70,6 +70,21 @@ export interface EppDetail {
   store?: StoreDetail | null;
 }
 
+export interface EppListItem {
+  id: number;
+  name: string;
+  area: string;
+  position: string;
+  shift: string;
+  eppType: string;
+  size: string;
+  requestedQuantity: number;
+  previousCondition: string;
+  deliveryEPPPrevious: boolean;
+  createdAt: string;
+  status: StatusType;
+}
+
 export interface Sizes {
   id: number;
   nameSize: string;
