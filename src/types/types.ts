@@ -30,6 +30,16 @@ export interface Epp {
   previousConditionId: number;
 }
 
+export interface StoreForm {
+  eppId: number;
+  deliveryDate: string;
+  authorizedBy: string;
+  lastDelivery: string;
+  replacementPolicy: boolean | null;
+  statusId: number;
+  deliveryConfirmation: boolean | null;
+}
+
 export interface StoreDetail {
   deliveryDate?: string;
   authorizedBy?: string;
