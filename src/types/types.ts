@@ -30,6 +30,15 @@ export interface Epp {
   previousConditionId: number;
 }
 
+export interface StoreDetail {
+  deliveryDate?: string;
+  authorizedBy?: string;
+  lastDelivery?: string;
+  replacementPolicy?: boolean;
+  statusId?: number;
+  deliveryConfirmation?: boolean;
+}
+
 export interface Sizes {
   id: number;
   nameSize: string;
