@@ -20,6 +20,7 @@ export const API_CONFIG = {
       getReasonRequest: "/api/Catalogs/ReasonRequest",
       getPreviousCondition: "/api/Catalogs/previous-condition",
       getEpp: "/api/Catalogs/epp",
+      getStatus: "/api/Catalogs/status",
     },
   },
 };
