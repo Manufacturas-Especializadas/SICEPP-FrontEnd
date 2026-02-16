@@ -81,3 +81,8 @@ export interface PreviousCondition {
   id: number;
   nameCondition: string;
 }
+
+export interface Status {
+  id: number;
+  nameStatus: string;
+}
