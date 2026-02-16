@@ -11,6 +11,7 @@ export const API_CONFIG = {
       getEppDetails: "/api/Epp/",
       create: "/api/Epp/Create",
     },
+    store: {},
     catalogs: {
       getEppTypes: "/api/Catalogs/epp-types",
       getSizes: "/api/Catalogs/sizes",
