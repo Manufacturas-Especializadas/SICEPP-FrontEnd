@@ -5,12 +5,14 @@ import type {
   PreviousCondition,
   ReasonRequest,
   Sizes,
+  Status,
 } from "../../types/types";
 import { apiClient } from "../client";
 
 class CatalogsService {
   private getEppTypesEndpoint = API_CONFIG.endpoints.catalogs.getEppTypes;
   private getSizesEndpoint = API_CONFIG.endpoints.catalogs.getSizes;
+  private getStatusEndpoint = API_CONFIG.endpoints.catalogs.getStatus;
   private getReasonRequestEndpoint =
     API_CONFIG.endpoints.catalogs.getReasonRequest;
   private getPreviousConditionEndpoint =
@@ -23,6 +25,10 @@ class CatalogsService {
 
   async getSizes(): Promise<Sizes[]> {
     return apiClient.get<Sizes[]>(this.getSizesEndpoint);
+  }
+
+  async getStatus(): Promise<Status[]> {
+    return apiClient.get<Status[]>(this.getStatusEndpoint);
   }
 
   async getReasonRequest(): Promise<ReasonRequest[]> {
