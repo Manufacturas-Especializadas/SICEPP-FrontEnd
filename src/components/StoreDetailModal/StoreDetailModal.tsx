@@ -5,7 +5,6 @@ import { useStoreForm } from "../../hooks/useStoreForm";
 import { FloatingSelect } from "../CustomInputs/FloatingSelect";
 import { Input } from "../CustomInputs/Input";
 import { DetailItem } from "../DetailItem/DetailItem";
-import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
 
 interface Props {
   eppId: number | null;
@@ -29,7 +28,7 @@ export const StoreDetailModal = ({ eppId, isOpen, onClose }: Props) => {
 
   if (!isOpen) return null;
 
-  if (loading) return <LoadingSkeleton />;
+  if (loading) return "Cargando datos..";
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 
