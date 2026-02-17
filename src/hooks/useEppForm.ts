@@ -1,18 +1,18 @@
 import { useCallback, useState, type SyntheticEvent } from "react";
-import type { Epp } from "../types/types";
+import type { CreateEpp, Epp } from "../types/types";
 import toast from "react-hot-toast";
 import { eppService } from "../api/services/EppService";
 
 interface useEppFormReturn {
   loading: boolean;
   error: string | null;
-  formData: Epp;
+  formData: CreateEpp;
   handleChange: (field: keyof Epp, value: string | number | boolean) => void;
   handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => Promise<void>;
   resetForm: () => void;
 }
 
-const initialFormData: Epp = {
+const initialFormData: CreateEpp = {
   name: "",
   area: "",
   position: "",
@@ -28,7 +28,7 @@ const initialFormData: Epp = {
 export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Epp>(initialFormData);
+  const [formData, setFormData] = useState<CreateEpp>(initialFormData);
 
   const handleChange = useCallback(
     (field: keyof Epp, value: string | number | boolean) => {
