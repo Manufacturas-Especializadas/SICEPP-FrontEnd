@@ -124,3 +124,8 @@ export interface Months {
   monthName: string;
   description: string;
 }
+
+export interface ReportRequest {
+  year: number;
+  month: number;
+}
