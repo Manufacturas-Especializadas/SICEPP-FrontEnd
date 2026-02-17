@@ -7,7 +7,6 @@ import { FloatingSelect } from "../../components/CustomInputs/FloatingSelect";
 import { useSizes } from "../../hooks/useSizes";
 import { useReasonRequest } from "../../hooks/useReasonRequest";
 import { usePreviousCondition } from "../../hooks/usePreviousCondition";
-import { LoadingSkeleton } from "../../components/LoadingSkeleton/LoadingSkeleton";
 import { Toaster } from "react-hot-toast";
 
 export const EppIndex = () => {
@@ -43,7 +42,7 @@ export const EppIndex = () => {
       value: e.id,
     })) || [];
 
-  if (loading) return <LoadingSkeleton />;
+  if (loading) return "Cargando datos...";
 
   return (
     <div className="min-h-screen bg-slate-100 p-4 md:p-8">
