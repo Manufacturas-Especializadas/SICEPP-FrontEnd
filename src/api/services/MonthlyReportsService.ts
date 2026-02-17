@@ -4,6 +4,7 @@ import { apiClient } from "../client";
 
 class MonthlyReportsService {
   private gethMonthsEndpoint = API_CONFIG.endpoints.monthlyReport.getMonths;
+
   private generateMonthlyReportEndpoint =
     API_CONFIG.endpoints.monthlyReport.generateMonthlyReport;
 
