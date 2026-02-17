@@ -85,6 +85,19 @@ export interface EppListItem {
   status: StatusType;
 }
 
+export interface CreateEpp {
+  name: string;
+  area: string;
+  position: string;
+  shift: string;
+  requestedQuantity: number;
+  deliveryEPPPrevious: boolean;
+  eppTypeId: number;
+  sizeId: number;
+  reasonRequestId: number;
+  previousConditionId: number;
+}
+
 export interface Sizes {
   id: number;
   nameSize: string;

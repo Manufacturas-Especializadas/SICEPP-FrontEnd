@@ -1,5 +1,5 @@
 import { API_CONFIG } from "../../config/api";
-import type { Epp, EppDetail } from "../../types/types";
+import type { CreateEpp, EppDetail } from "../../types/types";
 import { apiClient } from "../client";
 
 class EppService {
@@ -12,8 +12,8 @@ class EppService {
     return apiClient.get<EppDetail>(url);
   }
 
-  async create(formData: Epp): Promise<Epp> {
-    return apiClient.post<Epp>(this.createEndpoint, formData);
+  async create(formData: CreateEpp): Promise<CreateEpp> {
+    return apiClient.post<CreateEpp>(this.createEndpoint, formData);
   }
 }
 
