@@ -117,3 +117,15 @@ export interface Status {
   id: number;
   nameStatus: string;
 }
+
+export interface Months {
+  year: number;
+  month: number;
+  monthName: string;
+  description: string;
+}
+
+export interface ReportRequest {
+  year: number;
+  month: number;
+}

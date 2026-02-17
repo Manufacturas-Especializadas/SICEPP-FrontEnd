@@ -14,6 +14,10 @@ export const API_CONFIG = {
     store: {
       create: "/api/Store/Create",
     },
+    monthlyReport: {
+      getMonths: "/api/MonthlyReports/GetMonths",
+      generateMonthlyReport: "/api/MonthlyReports/GenerateMonthlyReport",
+    },
     catalogs: {
       getEppTypes: "/api/Catalogs/epp-types",
       getSizes: "/api/Catalogs/sizes",
