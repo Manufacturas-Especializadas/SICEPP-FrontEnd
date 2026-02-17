@@ -8,6 +8,7 @@ import { useSizes } from "../../hooks/useSizes";
 import { useReasonRequest } from "../../hooks/useReasonRequest";
 import { usePreviousCondition } from "../../hooks/usePreviousCondition";
 import { Toaster } from "react-hot-toast";
+import { LoadingSkeleton } from "../../components/LoadingSkeleton/LoadingSkeleton";
 
 export const EppIndex = () => {
   const { formData, loading, handleChange, handleSubmit, resetForm } =
@@ -42,7 +43,7 @@ export const EppIndex = () => {
       value: e.id,
     })) || [];
 
-  if (loading) return "Cargando datos...";
+  if (loading) return <LoadingSkeleton />;
 
   return (
     <div className="min-h-screen bg-slate-100 p-4 md:p-8">
