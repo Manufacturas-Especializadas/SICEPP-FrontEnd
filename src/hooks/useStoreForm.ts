@@ -27,6 +27,7 @@ const initialFormData: StoreForm = {
 
 export const useStoreForm = (
   eppId: number,
+  initialData?: Partial<StoreForm> | null,
   onSuccess?: () => void,
 ): useStoreFormReturn => {
   const [loading, setLoading] = useState(false);
@@ -139,6 +140,29 @@ export const useStoreForm = (
       }));
     }
   }, [eppId]);
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        eppId,
+        deliveryDate: initialData.deliveryDate
+          ? initialData.deliveryDate.split("T")[0]
+          : "",
+        authorizedBy: initialData.authorizedBy ?? "",
+        lastDelivery: initialData.lastDelivery
+          ? initialData.lastDelivery.split("T")[0]
+          : "",
+        replacementPolicy: initialData.replacementPolicy ?? null,
+        statusId: initialData.statusId ?? 0,
+        deliveryConfirmation: initialData.deliveryConfirmation ?? null,
+      });
+    } else {
+      setFormData({
+        ...initialFormData,
+        eppId,
+      });
+    }
+  }, [initialData, eppId]);
 
   return {
     loading,
