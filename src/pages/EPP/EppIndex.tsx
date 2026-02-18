@@ -14,11 +14,11 @@ export const EppIndex = () => {
     formData,
     loading,
     handleChange,
-    handleSubmit,
     handleDetailChange,
+    handleSubmit,
+    resetForm,
     addDetail,
     removeDetail,
-    resetForm,
   } = useEppForm();
 
   const { data: eppTypes } = useEppTypes();
@@ -27,25 +27,25 @@ export const EppIndex = () => {
   const { data: previousCondition } = usePreviousCondition();
 
   const eppTypesOptions =
-    eppTypes.map((e) => ({
+    eppTypes?.map((e) => ({
       label: e.nameType,
       value: e.id,
     })) || [];
 
   const sizesOptions =
-    sizes.map((e) => ({
+    sizes?.map((e) => ({
       label: e.nameSize,
       value: e.id,
     })) || [];
 
   const reasonRequestOptions =
-    reasonRequest.map((e) => ({
+    reasonRequest?.map((e) => ({
       label: e.nameReason,
       value: e.id,
     })) || [];
 
   const previousConditionOptions =
-    previousCondition.map((e) => ({
+    previousCondition?.map((e) => ({
       label: e.nameCondition,
       value: e.id,
     })) || [];
@@ -61,152 +61,149 @@ export const EppIndex = () => {
         onSubmit={handleSubmit}
         resetForm={resetForm}
       >
-        <div className="flex flex-col gap-1.5">
-          <Input
-            label="Nombre"
-            value={formData.name}
-            onChange={(e) => {
-              handleChange("name", e.target.value);
-            }}
-          />
+        <Input
+          label="Nombre"
+          value={formData.name}
+          onChange={(e) => handleChange("name", e.target.value)}
+        />
+
+        <Input
+          label="Área"
+          value={formData.area}
+          onChange={(e) => handleChange("area", e.target.value)}
+        />
+
+        <Input
+          label="Puesto"
+          value={formData.position}
+          onChange={(e) => handleChange("position", e.target.value)}
+        />
+
+        <Input
+          label="Turno"
+          value={formData.shift}
+          onChange={(e) => handleChange("shift", e.target.value)}
+        />
+
+        <div className="md:col-span-2 space-y-6 mt-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-bold text-slate-600 uppercase tracking-wider">
+              Detalles de EPP
+            </h3>
+
+            <button
+              type="button"
+              onClick={addDetail}
+              className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-4 
+              py-2 rounded-md transition"
+            >
+              + Agregar
+            </button>
+          </div>
+
+          {formData.details.map((detail, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-1 md:grid-cols-12 gap-4 bg-slate-50 
+              p-5 rounded-xl border border-slate-200 w-full"
+            >
+              <div className="md:col-span-4">
+                <FloatingSelect
+                  label="Tipo de EPP"
+                  options={eppTypesOptions}
+                  value={detail.eppTypeId}
+                  onChange={(value) =>
+                    handleDetailChange(index, "eppTypeId", Number(value))
+                  }
+                />
+              </div>
+
+              <div className="md:col-span-3">
+                <FloatingSelect
+                  label="Talla (opcional)"
+                  options={sizesOptions}
+                  value={detail.sizeId ?? 0}
+                  onChange={(value) =>
+                    handleDetailChange(index, "sizeId", Number(value))
+                  }
+                />
+              </div>
+
+              <div className="md:col-span-3">
+                <Input
+                  label="Cantidad"
+                  type="number"
+                  value={detail.requestedQuantity || ""}
+                  onChange={(e) =>
+                    handleDetailChange(
+                      index,
+                      "requestedQuantity",
+                      e.target.value,
+                    )
+                  }
+                />
+              </div>
+
+              <div className="md:col-span-2 flex items-end">
+                {formData.details.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeDetail(index)}
+                    className="w-full text-xs bg-red-500 hover:bg-red-600 
+                    text-white px-3 py-2 rounded-md transition hover:cursor-pointer"
+                  >
+                    Eliminar
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <Input
-            label="Área"
-            value={formData.area}
-            onChange={(e) => {
-              handleChange("area", e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <Input
-            label="Puesto"
-            value={formData.position}
-            onChange={(e) => {
-              handleChange("position", e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <Input
-            label="Turno"
-            value={formData.shift}
-            onChange={(e) => {
-              handleChange("shift", e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <FloatingSelect
-            label="Tipo de EPP"
-            options={eppTypesOptions}
-            value={formData.eppTypeId}
-            onChange={(value) => {
-              handleChange("eppTypeId", Number(value));
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <FloatingSelect
-            label="Talla (si aplica)"
-            options={sizesOptions}
-            value={formData.sizeId}
-            onChange={(value) => {
-              handleChange("sizeId", Number(value));
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <Input
-            label="Cantidad solicitada"
-            type="number"
-            value={formData.requestedQuantity || ""}
-            onChange={(e) => {
-              handleChange("requestedQuantity", e.target.value);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
+        <div className="md:col-span-2">
           <FloatingSelect
             label="Motivo de la solicitud"
             options={reasonRequestOptions}
             value={formData.reasonRequestId}
-            onChange={(value) => {
-              handleChange("reasonRequestId", Number(value));
-            }}
+            onChange={(value) => handleChange("reasonRequestId", Number(value))}
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="md:col-span-2">
           <FloatingSelect
             label="Condición del EPP anterior"
             options={previousConditionOptions}
             value={formData.previousConditionId}
-            onChange={(value) => {
-              handleChange("previousConditionId", Number(value));
-            }}
+            onChange={(value) =>
+              handleChange("previousConditionId", Number(value))
+            }
           />
         </div>
 
-        <div className="flex flex-col gap-1.5">
+        <div className="md:col-span-2">
           <label className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">
             ¿Entrega EPP anterior?
           </label>
 
-          <div
-            className={`flex items-center gap-4 h-11.5 px-4 rounded-lg border transition-all duration-200 ${
-              formData.deliveryEPPPrevious !== null
-                ? "bg-blue-50/30 border-blue-400 shadow-sm shadow-blue-100"
-                : "bg-slate-50 border-slate-200"
-            }`}
-          >
-            <label className="flex items-center gap-2 cursor-pointer group">
+          <div className="flex items-center gap-6 h-12 px-4">
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
                 name="deliveryEPPPrevious"
-                className="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500 
-                cursor-pointer transition-transform group-active:scale-90"
                 checked={formData.deliveryEPPPrevious === true}
                 onChange={() => handleChange("deliveryEPPPrevious", true)}
               />
-              <span
-                className={`text-sm font-medium transition-colors ${
-                  formData.deliveryEPPPrevious === true
-                    ? "text-blue-700"
-                    : "text-slate-600 group-hover:text-blue-600"
-                }`}
-              >
-                Sí
-              </span>
+              <span>Sí</span>
             </label>
-            <div className="w-px h-4 bg-slate-200" />
-            <label className="flex items-center gap-2 cursor-pointer group">
+
+            <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
                 name="deliveryEPPPrevious"
-                className="w-4 h-4 text-blue-600 border-slate-300 
-                focus:ring-blue-500 cursor-pointer transition-transform 
-                group-active:scale-90"
                 checked={formData.deliveryEPPPrevious === false}
                 onChange={() => handleChange("deliveryEPPPrevious", false)}
               />
-              <span
-                className={`text-sm font-medium transition-colors ${
-                  formData.deliveryEPPPrevious === false
-                    ? "text-blue-700"
-                    : "text-slate-600 group-hover:text-blue-600"
-                }`}
-              >
-                No
-              </span>
+              <span>No</span>
             </label>
           </div>
         </div>
