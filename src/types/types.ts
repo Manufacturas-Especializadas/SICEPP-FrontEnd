@@ -90,12 +90,10 @@ export interface CreateEpp {
   area: string;
   position: string;
   shift: string;
-  requestedQuantity: number;
   deliveryEPPPrevious: boolean;
-  eppTypeId: number;
-  sizeId: number;
   reasonRequestId: number;
   previousConditionId: number;
+  details: CreateEppDetail[];
 }
 
 export interface CreateEppDetail {
