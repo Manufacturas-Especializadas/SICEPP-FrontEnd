@@ -1,5 +1,5 @@
 import { useCallback, useState, type SyntheticEvent } from "react";
-import type { CreateEpp, Epp } from "../types/types";
+import type { CreateEpp, CreateEppDetail } from "../types/types";
 import toast from "react-hot-toast";
 import { eppService } from "../api/services/EppService";
 
@@ -7,8 +7,18 @@ interface useEppFormReturn {
   loading: boolean;
   error: string | null;
   formData: CreateEpp;
-  handleChange: (field: keyof Epp, value: string | number | boolean) => void;
+  handleChange: (
+    field: keyof Omit<CreateEpp, "details">,
+    value: string | number | boolean,
+  ) => void;
+  handleDetailChange: (
+    index: number,
+    field: keyof CreateEppDetail,
+    value: string | number,
+  ) => void;
   handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => Promise<void>;
+  addDetail: () => void;
+  removeDetail: (index: number) => void;
   resetForm: () => void;
 }
 
@@ -17,12 +27,16 @@ const initialFormData: CreateEpp = {
   area: "",
   position: "",
   shift: "",
-  requestedQuantity: 0,
   deliveryEPPPrevious: true,
-  eppTypeId: 0,
-  sizeId: 0,
   reasonRequestId: 0,
   previousConditionId: 0,
+  details: [
+    {
+      eppTypeId: 0,
+      sizeId: null,
+      requestedQuantity: 0,
+    },
+  ],
 };
 
 export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
@@ -31,12 +45,14 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
   const [formData, setFormData] = useState<CreateEpp>(initialFormData);
 
   const handleChange = useCallback(
-    (field: keyof Epp, value: string | number | boolean) => {
+    (
+      field: keyof Omit<CreateEpp, "details">,
+      value: string | number | boolean,
+    ) => {
       setFormData((prev) => ({
         ...prev,
         [field]:
-          typeof value !== "boolean" &&
-          (field.toString().endsWith("Id") || field === "requestedQuantity")
+          typeof value !== "boolean" && field.toString().endsWith("Id")
             ? Number(value)
             : value,
       }));
@@ -45,6 +61,49 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
     },
     [error],
   );
+
+  const handleDetailChange = useCallback(
+    (index: number, field: keyof CreateEppDetail, value: string | number) => {
+      setFormData((prev) => {
+        const updatedDetails = [...prev.details];
+
+        updatedDetails[index] = {
+          ...updatedDetails[index],
+          [field]:
+            field === "requestedQuantity" || field.endsWith("Id")
+              ? Number(value)
+              : value,
+        };
+
+        return {
+          ...prev,
+          details: updatedDetails,
+        };
+      });
+    },
+    [],
+  );
+
+  const addDetail = useCallback(() => {
+    setFormData((prev) => ({
+      ...prev,
+      details: [
+        ...prev.details,
+        {
+          eppTypeId: 0,
+          sizeId: null,
+          requestedQuantity: 0,
+        },
+      ],
+    }));
+  }, []);
+
+  const removeDetail = useCallback((index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      details: prev.details.filter((_, i) => i !== index),
+    }));
+  }, []);
 
   const validateForm = useCallback((): boolean => {
     const errors: string[] = [];
@@ -57,13 +116,16 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
 
     if (!formData.shift.trim()) errors.push("El turno es requerido");
 
-    if (Number(formData.eppTypeId) === 0)
-      errors.push("El tipo de Epp es requerido");
+    if (formData.details.length === 0)
+      errors.push("Debe agregar al menos un EPP");
 
-    // if (Number(formData.sizeId) === 0) errors.push("La talla es requerida");
+    formData.details.forEach((detail, index) => {
+      if (Number(detail.eppTypeId) === 0)
+        errors.push(`El tipo de EPP en la fila ${index + 1} es requerido`);
 
-    if (Number(formData.requestedQuantity) === 0)
-      errors.push("La cantidad es requerida");
+      if (Number(detail.requestedQuantity) === 0)
+        errors.push(`La cantidad en la fila ${index + 1} es requerida`);
+    });
 
     if (Number(formData.reasonRequestId) === 0)
       errors.push("El motivo de la solicitud es requerido");
@@ -103,15 +165,7 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
       const loadingToast = toast.loading("Registrando...");
 
       try {
-        const payload = {
-          ...formData,
-          eppTypeId: Number(formData.eppTypeId),
-          previousConditionId: Number(formData.previousConditionId),
-          reasonRequestId: Number(formData.reasonRequestId),
-          requestedQuantity: Number(formData.requestedQuantity),
-        };
-
-        await eppService.create(payload);
+        await eppService.create(formData);
 
         toast.dismiss(loadingToast);
 
@@ -141,7 +195,10 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
     error,
     formData,
     handleChange,
+    handleDetailChange,
     handleSubmit,
+    addDetail,
+    removeDetail,
     resetForm,
   };
 };
