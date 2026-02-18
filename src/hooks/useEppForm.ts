@@ -60,7 +60,7 @@ export const useEppForm = (onSuccess?: () => void): useEppFormReturn => {
     if (Number(formData.eppTypeId) === 0)
       errors.push("El tipo de Epp es requerido");
 
-    if (Number(formData.sizeId) === 0) errors.push("La talla es requerida");
+    // if (Number(formData.sizeId) === 0) errors.push("La talla es requerida");
 
     if (Number(formData.requestedQuantity) === 0)
       errors.push("La cantidad es requerida");
