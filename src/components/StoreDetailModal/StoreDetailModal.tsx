@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import { useEppDetails } from "../../hooks/useEppDetails";
 import { useStatus } from "../../hooks/useStatus";
 import { useStoreForm } from "../../hooks/useStoreForm";
@@ -38,40 +37,6 @@ export const StoreDetailModal = ({ eppId, isOpen, onClose }: Props) => {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 
       backdrop-blur-sm"
     >
-      <Toaster
-        toastOptions={{
-          className: "",
-          style: {
-            background: "#363636",
-            color: "#fff",
-            zIndex: 9999,
-          },
-          success: {
-            duration: 10000,
-            position: "top-right",
-            style: {
-              background: "#10B981",
-              color: "#fff",
-            },
-          },
-          error: {
-            duration: 5000,
-            position: "top-right",
-            style: {
-              background: "#EF4444",
-              color: "#fff",
-            },
-          },
-          loading: {
-            duration: Infinity,
-            position: "top-right",
-            style: {
-              background: "#3B82F6",
-              color: "#fff",
-            },
-          },
-        }}
-      />
       <div
         className="bg-white w-full max-w-4xl rounded-2xl shadow-xl p-8 relative
         animate-fadeIn max-h-[90vh] overflow-y-auto"

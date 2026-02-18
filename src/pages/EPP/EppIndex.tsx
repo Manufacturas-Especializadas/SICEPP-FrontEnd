@@ -7,7 +7,6 @@ import { FloatingSelect } from "../../components/CustomInputs/FloatingSelect";
 import { useSizes } from "../../hooks/useSizes";
 import { useReasonRequest } from "../../hooks/useReasonRequest";
 import { usePreviousCondition } from "../../hooks/usePreviousCondition";
-import { Toaster } from "react-hot-toast";
 import { LoadingSkeleton } from "../../components/LoadingSkeleton/LoadingSkeleton";
 
 export const EppIndex = () => {
@@ -47,40 +46,6 @@ export const EppIndex = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 p-4 md:p-8">
-      <Toaster
-        toastOptions={{
-          className: "",
-          style: {
-            background: "#363636",
-            color: "#fff",
-            zIndex: 9999,
-          },
-          success: {
-            duration: 10000,
-            position: "top-right",
-            style: {
-              background: "#10B981",
-              color: "#fff",
-            },
-          },
-          error: {
-            duration: 5000,
-            position: "top-right",
-            style: {
-              background: "#EF4444",
-              color: "#fff",
-            },
-          },
-          loading: {
-            duration: Infinity,
-            position: "top-right",
-            style: {
-              background: "#3B82F6",
-              color: "#fff",
-            },
-          },
-        }}
-      />
       <FormCard
         title="REGISTRO DE EPP"
         subtitle="Control de equipo de protección persona para colaboradores"
