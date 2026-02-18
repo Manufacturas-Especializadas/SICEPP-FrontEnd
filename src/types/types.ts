@@ -98,6 +98,12 @@ export interface CreateEpp {
   previousConditionId: number;
 }
 
+export interface CreateEppDetail {
+  eppTypeId: number;
+  sizeId: number | null;
+  requestedQuantity: number;
+}
+
 export interface Sizes {
   id: number;
   nameSize: string;
