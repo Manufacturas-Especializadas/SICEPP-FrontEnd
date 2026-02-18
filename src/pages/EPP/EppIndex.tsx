@@ -10,8 +10,16 @@ import { usePreviousCondition } from "../../hooks/usePreviousCondition";
 import { LoadingSkeleton } from "../../components/LoadingSkeleton/LoadingSkeleton";
 
 export const EppIndex = () => {
-  const { formData, loading, handleChange, handleSubmit, resetForm } =
-    useEppForm();
+  const {
+    formData,
+    loading,
+    handleChange,
+    handleSubmit,
+    handleDetailChange,
+    addDetail,
+    removeDetail,
+    resetForm,
+  } = useEppForm();
 
   const { data: eppTypes } = useEppTypes();
   const { data: sizes } = useSizes();
