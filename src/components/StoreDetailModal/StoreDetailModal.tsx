@@ -17,9 +17,13 @@ export const StoreDetailModal = ({ eppId, isOpen, onClose }: Props) => {
 
   const { data: status } = useStatus();
 
-  const { formData, handleChange, handleSubmit } = useStoreForm(eppId!, () => {
-    onClose();
-  });
+  const { formData, handleChange, handleSubmit } = useStoreForm(
+    eppId!,
+    data?.store ?? null,
+    () => {
+      onClose();
+    },
+  );
 
   const statusOptions = status.map((e) => ({
     label: e.nameStatus,
