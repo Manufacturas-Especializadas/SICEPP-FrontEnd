@@ -5,11 +5,12 @@ import { StoreDetailModal } from "../StoreDetailModal/StoreDetailModal";
 
 interface Props {
   data: EppListItem[];
+  onRefresh: () => void;
 }
 
 const ITEMS_PER_PAGE = 10;
 
-export const StoreTable = ({ data }: Props): JSX.Element => {
+export const StoreTable = ({ data, onRefresh }: Props): JSX.Element => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -117,6 +118,10 @@ export const StoreTable = ({ data }: Props): JSX.Element => {
         eppId={selectedId}
         isOpen={open}
         onClose={() => setOpen(false)}
+        onSuccess={() => {
+          setOpen(false);
+          onRefresh();
+        }}
       />
       ;
     </div>

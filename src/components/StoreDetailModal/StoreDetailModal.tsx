@@ -9,9 +9,15 @@ interface Props {
   eppId: number | null;
   isOpen: boolean;
   onClose: () => void;
+  onSuccess: () => void;
 }
 
-export const StoreDetailModal = ({ eppId, isOpen, onClose }: Props) => {
+export const StoreDetailModal = ({
+  eppId,
+  isOpen,
+  onClose,
+  onSuccess,
+}: Props) => {
   const { data, loading } = useEppDetails(eppId);
 
   const { data: status } = useStatus();
@@ -19,9 +25,7 @@ export const StoreDetailModal = ({ eppId, isOpen, onClose }: Props) => {
   const { formData, handleChange, handleSubmit } = useStoreForm(
     eppId!,
     data?.store ?? null,
-    () => {
-      onClose();
-    },
+    onSuccess,
   );
 
   const statusOptions = status.map((e) => ({

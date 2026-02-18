@@ -4,7 +4,7 @@ import { StoreTable } from "../../components/StoreTable/StoreTable";
 import { useEpp } from "../../hooks/useEpp";
 
 export const Store = () => {
-  const { data } = useEpp();
+  const { data, refresh } = useEpp();
 
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ export const Store = () => {
           Reportes
         </button>
       </div>
-      <StoreTable data={data} />
+      <StoreTable data={data} onRefresh={refresh} />
     </div>
   );
 };
