@@ -58,7 +58,7 @@ export const StoreDetailModal = ({
 
         <div className="space-y-6">
           <h3 className="text-lg font-semibold text-gray-700">
-            Información del EPP
+            Información de la solicitud
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -66,17 +66,39 @@ export const StoreDetailModal = ({
             <DetailItem label="Área" value={data?.area} />
             <DetailItem label="Puesto" value={data?.position} />
             <DetailItem label="Turno" value={data?.shift} />
-            <DetailItem label="Tipo de Epp" value={data?.eppType} />
-            <DetailItem label="Talla" value={data?.size} />
-            <DetailItem
-              label="Cantidad solicitada"
-              value={String(data?.requestedQuantity)}
-            />
             <DetailItem label="Motivo" value={data?.reasonRequest} />
             <DetailItem
               label="¿Entregó EPP anterior?"
               value={data?.deliveryEPPPrevious ? "Sí" : "No"}
             />
+          </div>
+
+          <div>
+            <h4 className="text-md font-semibold text-gray-700 mb-4">
+              EPP solicitados
+            </h4>
+
+            <div className="border rounded-xl overflow-hidden max-h-64 overflow-y-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 text-gray-600 text-xs uppercase">
+                  <tr>
+                    <th className="px-4 py-3 text-left">Tipo</th>
+                    <th className="px-4 py-3 text-left">Talla</th>
+                    <th className="px-4 py-3 text-left">Cantidad</th>
+                  </tr>
+                </thead>
+
+                <tbody className="divide-y">
+                  {data?.details.map((item, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="px-4 py-3 font-medium">{item.eppType}</td>
+                      <td className="px-4 py-3">{item.size ?? "No aplica"}</td>
+                      <td className="px-4 py-3">{item.requestedQuantity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
