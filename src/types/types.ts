@@ -52,20 +52,25 @@ export interface StoreDetail {
   deliveryConfirmation?: boolean;
 }
 
+export interface EppDetailItem {
+  eppType: string;
+  size: string | null;
+  requestedQuantity: number;
+}
+
 export interface EppDetail {
   id: number;
   name: string;
   area: string;
   position: string;
   shift: string;
-  requestedQuantity: number;
   deliveryEPPPrevious: boolean;
   createdAt?: string;
 
-  eppType: string;
-  size: string;
   reasonRequest: string;
   previousCondition: string;
+
+  details: EppDetailItem[];
 
   store?: StoreDetail | null;
 }
