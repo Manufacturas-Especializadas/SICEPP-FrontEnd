@@ -32,8 +32,7 @@ export const StoreTable = ({ data, onRefresh }: Props): JSX.Element => {
               <th className="px-6 py-4 text-left">Solicitante</th>
               <th className="px-6 py-4 text-left">Área</th>
               <th className="px-6 py-4 text-left">Puesto</th>
-              <th className="px-6 py-4 text-left">Epp solicitado</th>
-              <th className="px-6 py-4 text-left">Cantidad</th>
+              <th className="px-6 py-4 text-left">Items solicitados</th>
               <th className="px-6 py-4 text-left">Fecha de la solicitud</th>
               <th className="px-6 py-4 text-left">Estado</th>
               <th className="px-6 py-4 text-left">Acciones</th>
@@ -46,8 +45,7 @@ export const StoreTable = ({ data, onRefresh }: Props): JSX.Element => {
                 <td className="px-6 py-4 font-medium">{item.name}</td>
                 <td className="px-6 py-4">{item.area}</td>
                 <td className="px-6 py-4">{item.position}</td>
-                <td className="px-6 py-4">{item.eppType}</td>
-                <td className="px-6 py-4">{item.requestedQuantity}</td>
+                <td className="px-6 py-4 items-center">{item.itemsCount}</td>
                 <td className="px-6 py-4 text-gray-500">
                   {formatDateTime(item.createdAt)}
                 </td>
