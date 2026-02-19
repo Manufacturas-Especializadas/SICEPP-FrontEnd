@@ -76,12 +76,10 @@ export interface EppListItem {
   area: string;
   position: string;
   shift: string;
-  eppType: string;
-  size: string;
-  requestedQuantity: number;
   previousCondition: string;
   deliveryEPPPrevious: boolean;
   createdAt: string;
+  itemsCount: number;
   status: StatusType;
 }
 
